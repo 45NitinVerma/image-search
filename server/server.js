@@ -28,13 +28,21 @@ app.use(
   })
 );
 
-// Express session
+// Trust the Render proxy
+app.set('trust proxy', 1); 
+
+// Express session (UPDATED FOR PRODUCTION)
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    // You might want to use connect-mongo for session storage in production
+    cookie: {
+      sameSite: 'none', // Required for cross-site cookies
+      secure: true,     // Required for sameSite: 'none'
+      httpOnly: true,   // Good practice
+      maxAge: 1000 * 60 * 60 * 24 * 7 // e.g., 7 days
+    },
   })
 );
 
