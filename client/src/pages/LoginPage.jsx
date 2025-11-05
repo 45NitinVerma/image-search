@@ -1,15 +1,18 @@
 import React from 'react';
 
+const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
 const LoginPage = () => {
   // These URLs must point to your backend server
   const googleLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/google';
+    // 2. Use the dynamic baseURL for the href
+    window.location.href = `${baseURL}/auth/google`;
   };
   const githubLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/github';
+    window.location.href = `${baseURL}/auth/github`;
   };
   const facebookLogin = () => {
-    window.location.href = 'http://localhost:5000/auth/facebook';
+    window.location.href = `${baseURL}/auth/facebook`;
   };
 
   return (
